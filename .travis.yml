@@ -6,7 +6,7 @@ before_install:
   - docker build -t arisahirata/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run arisahirata/react-test npm test -- --coverage
+  - docker run -e CI=true arisahirata/react-test npm test
 
 after_success:
   - docker build -t arisahirata/multi-client ./client
@@ -20,3 +20,5 @@ after_success:
   - docker push arisahirata/multi-nginx
   - docker push arisahirata/multi-server
   - docker push arisahirata/multi-worker
+
+language: generic
